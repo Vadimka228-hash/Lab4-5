@@ -140,7 +140,7 @@ public class GraphicsDisplay extends JPanel {
 	protected void paintGrid (Graphics2D canvas) {
 		canvas.setStroke(gridStroke);
 		canvas.setColor(Color.GRAY);
-		// Сетка
+		
 		double pos = viewport[0][0];;
 		double step = (viewport[1][0] - viewport[0][0])/10;
 		
@@ -162,7 +162,7 @@ public class GraphicsDisplay extends JPanel {
 	protected void paintGraphics (Graphics2D canvas) {
 		canvas.setStroke(this.markerStroke);
 	    canvas.setColor(Color.GREEN);
-	    // Линии
+	    
 	    Double currentX = null;
 	    Double currentY = null;
 	    for (Double[] point : this.graphicsData)
@@ -181,7 +181,7 @@ public class GraphicsDisplay extends JPanel {
 	}
 	
 	protected void paintAxis(Graphics2D canvas){
-		// Оси
+		
 		canvas.setStroke(this.axisStroke);
 		canvas.setColor(java.awt.Color.BLACK);
 		canvas.setFont(this.axisFont);
@@ -217,13 +217,13 @@ public class GraphicsDisplay extends JPanel {
 	    int i = -1;
 	    for (Double[] point : graphicsData) {
 	      i++;
-	      //Цвета маркеров
+	      
 			if(isSpecialPoint(point[1]) == true)
 				canvas.setColor(Color.MAGENTA);
 			else
 				canvas.setColor(Color.BLACK);
 	      
-			// Маркеры
+			
 	        GeneralPath star = new GeneralPath();
 			Point2D.Double center = xyToPoint(point[0], point[1]);
 			star.moveTo(center.getX(), center.getY());
@@ -261,7 +261,7 @@ public class GraphicsDisplay extends JPanel {
 	}
 	
 	protected boolean isSpecialPoint(double y){
-		//раскраска маркеров по условию
+		
 		int Yint = (int)y;
 		boolean flag = false; 
 		
@@ -286,7 +286,7 @@ public class GraphicsDisplay extends JPanel {
 
 
 	private void paintLabels(Graphics2D canvas){
-		// Подписи координат и сетки
+		
 		canvas.setColor(Color.BLACK);
 		canvas.setFont(this.labelsFont);
 		FontRenderContext context=canvas.getFontRenderContext();
@@ -341,7 +341,7 @@ public class GraphicsDisplay extends JPanel {
 		Color oldColor = canvas.getColor();
 		Font oldFont = canvas.getFont();
 		Paint oldPaint = canvas.getPaint();
-		/// поворот
+		
 		if (clockRotate) {
 			AffineTransform at = AffineTransform.getRotateInstance(Math.PI/2, getSize().getWidth()/2, getSize().getHeight()/2); 
 			at.concatenate(new AffineTransform(getSize().getHeight()/getSize().getWidth(), 0.0, 0.0, getSize().getWidth()/getSize().getHeight(),
@@ -374,7 +374,7 @@ public class GraphicsDisplay extends JPanel {
 	}
 	
 	private void paintSelection(Graphics2D canvas) {
-		//Область выделения
+		
 	    if (!scaleMode) return;
 	    canvas.setStroke(selectionStroke);
 	    canvas.setColor(Color.BLACK);
@@ -388,7 +388,7 @@ public class GraphicsDisplay extends JPanel {
 	
 
 	
-	//Приближаем
+	
 	protected int findSelectedPoint(int x, int y)
 	  {
 	    if (graphicsData == null) return -1;
@@ -451,12 +451,12 @@ public class GraphicsDisplay extends JPanel {
 		    }
 		  }
 	 
-	 // Оброботчик движения мыши
+	 
 	 public class MouseMotionHandler implements MouseMotionListener {
 	
 		 public void mouseDragged(MouseEvent ev) {
 			 if (changeMode) {
-				//Добавить поворот (при)
+				
 				 double[] currentPoint = translatePointToXY(ev.getX(), ev.getY());
 				 double newY = ((Double[])graphicsData.get(selectedMarker))[1].doubleValue() + 
 						 (currentPoint[1] - ((Double[])graphicsData.get(selectedMarker))[1].doubleValue());
@@ -485,7 +485,7 @@ public class GraphicsDisplay extends JPanel {
 
 	
 
-		 //перемещения мыши
+		 
 	public void mouseMoved(MouseEvent ev) {
 		selectedMarker = findSelectedPoint(ev.getX(), ev.getY());
 	      if (selectedMarker >= 0)
